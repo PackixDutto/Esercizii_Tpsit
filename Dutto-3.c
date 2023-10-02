@@ -1,7 +1,7 @@
 /*
 author: Patrick Dutto
 date:18/09/2023
-es.
+es.3
 */
 
 #include <stdio.h>
@@ -12,8 +12,6 @@ es.
 #include <stdbool.h>
 #define DIM_RIGA 200
 #define NUM_RIGHE 20000
-
-
 
 //strtok funzione
 
@@ -29,7 +27,7 @@ typedef struct Film {
 void stampaFile(Film c[], int n) {
     int k;
     for(k=0; k<n; k++) {
-        printf("%d, %c, %c, %d, %c\n",c[k].numero, c[k].titoloFilm, c[k].genere, c[k].annoUscita, c[k].disponibilita);
+        printf("%d, %c, %c, %d, %c\n", &(c+k)->numero, &(c+k)->titoloFilm, &(c+k)->genere, &(c+k)->annoUscita, &(c+k)->disponibilita);
 
     }
 
@@ -42,6 +40,7 @@ int main() {
     char* campo;
     Film array_film[NUM_RIGHE];
     int counter=0;
+    int anno;
 
     FILE *fp = fopen("Ciak_film.txt","r");
     if(fp==NULL) {
@@ -49,24 +48,33 @@ int main() {
         exit(1);
     } else {
 
+        printf("inserisci l'anno in qui vuoi sapere che film sono usciti");
+        scanf("%d", &anno);
+
         while(fgets(riga, DIM_RIGA, fp)){
 
+            if(* (array_film+counter)->annoUscita == anno){
+
             campo=strtok(riga, ",");
-            array_film[counter].numero = atoi(campo);
+            (*(array_film + counter)).numero = atoi(campo);
+            (array_film+counter)->numero = atoi(campo);
 
             campo=strtok(NULL, ",");
-            array_film[counter].titoloFilm = strdup(campo); //strdup ti ritorna la copia
+            (array_film+counter)->titoloFilm = strdup(campo); //strdup ti ritorna la copia
 
             campo=strtok(NULL, ",");
-            array_film[counter].genere = strdup(campo);
+            (array_film+counter)->genere = strdup(campo);
 
             campo=strtok(NULL, ",");
-            array_film[counter].annoUscita = atoi(campo);
+            (array_film+counter)->annoUscita = atoi(campo);
 
             campo=strtok(NULL, ",");
-            array_film[counter].disponibilita = strdup(campo);
+            (array_film+counter)->disponibilita = strdup(campo);
 
             counter = counter + 1;
+            }else{
+            counter = counter + 1;
+            }
 
         }
 

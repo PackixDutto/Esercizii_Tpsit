@@ -13,6 +13,7 @@ es.
 #define DIM_RIGA 200
 #define NUM_RIGHE 20000
 
+
 //strtok funzione
 
 typedef struct Film {
