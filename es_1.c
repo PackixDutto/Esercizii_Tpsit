@@ -18,29 +18,23 @@ testo: Scrivere un programma in C che calcoli la somma degli
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
-#define DIM_RIGA 10
+#define DIM 10
 
-int calcolaSomma(int* vet, int n){
+int calcolaSomma(int* vet, int n) {
     int somma;
-    for(int k=0; k<n; k++){
-        somma += *(vet + k);
+    for(int k=0; k<n; k++) {
+        somma = *(vet + k) + somma;
     }
     return somma;
 }
 
-void riempiVet(int* vet, int n){
-    for(int k=0; k<n; k++){
-        printf("Inserisci il valore in posizione %d: ", k);
-        scanf("%d", (vet + k));
-    }
-}
 
-int main(){
-    int* vet;
+
+int main() {
+    int *vet[DIM]={1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     int somma;
-    riempiVet(vet, DIM);
     somma = calcolaSomma(vet, DIM);
-    printf("La somma e' : %d", somma);
+    printf("la somma e %d", somma);
 
     return 0;
 }
