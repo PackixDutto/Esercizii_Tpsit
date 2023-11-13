@@ -17,89 +17,25 @@ testo: -Creare un file .csv con COGNOME, NOME, NASCITA (annomesegiorno in format
 #define DIM 50
 
 
-typedef struct Persona{
-char cognome[DIM];
-char nome [DIM];
-int nascita;
-}Persona;
-
-/*
-typedef struct Data{
-int giorno;
-int mese;
-int anno;
-}Data;
-*/
-
-void stampaFile(Persona u[], int n) {
-    int k;
-    for(k=0; k<n; k++) {
-        printf("%s, %s, %d\n", &(u+k)->cognome, &(c+k)->nome, &(u+k)->nascita);
-
-    }
-
-}
-
-int contaRighe(FILE *fp){
-
-}
-
-void malloc (Persona utente[], char riga){
-
-while(fgets(riga, DIM, fp)){
-
-            campo=strtok(riga, ",");
-            (*(utente + counter)).cognome = strdup(campo);
-            (utente+counter)->cognome = strdup(campo);
-
-            campo=strtok(NULL, ",");
-            (utente+counter)->nome = strdup(campo); //strdup ti ritorna la copia
-
-            campo=strtok(NULL, ",");
-            (utente+counter)->nascita = atoi(campo);
-
-            counter = counter + 1;
-            }else{
-            counter = counter + 1;
-            }
-
-}
-
-
-
 int main() {
-    Persona utente[DIM];
-    char riga[DIM];
-    char* campo;
-    int counter=0;
-    int dim=0;
-    int *vett;
+    int dim;
 
-    FILE *fp = fopen("ProvaVerifica","r");
-    if(fp==NULL) {
-        printf("file non esiste");
-        exit(1);
-    } else {
+    printf("Inserisci la dimensione dell'array: ");
+    scanf("%d", &dim);
 
-        cont = contaRighe(fp);
+    int *vet = (int *)malloc(dim * sizeof(int)); // Allocazione dinamica dell'array di interi
 
-        //printf("inserisci la dimensione del vettore");
-        //scanf("%d", dim);
-
-        printf("inserisci la dimensione del vettore");
-        //scanf("%d", dim);
-
-        vett = (int*) malloc (cont*sizeof(int)); 
-
-        
-
-        stampaFile(utente, counter);
-
-        fclose(fp);
+    printf("Inserisci %d valori interi:\n", dim);
+    for (int i = 0; i < dim; i++) {
+        scanf("%d", &vet[i]);
     }
 
+    printf("Valori inseriti:\n");
+    for (int i = 0; i < dim; i++) {
+        printf("%d ", vet[i]);
+    }
 
+    free(vet);
+
+    return 0;
 }
-
-
-
