@@ -62,11 +62,11 @@ int main() {
             campo=strtok(NULL, ",");
             array_film[counter].titoloFilm = strdup(campo); //strdup ti ritorna la copia
 
-            campo=strtok(NULL, ",");
+            campo=strtok(NULL, ","); // impostato su null per ottenere la frase succesiva
             array_film[counter].genere = strdup(campo);
 
             campo=strtok(NULL, ",");
-            array_film[counter].annoUscita = atoi(campo);
+            array_film[counter].annoUscita = atoi(campo); // casting da stringa a intero
 
             campo=strtok(NULL, ",");
             array_film[counter].disponibilita = strdup(campo);

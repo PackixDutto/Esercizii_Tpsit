@@ -52,7 +52,7 @@ int main() {
         while(fgets(riga, DIM_RIGA, fp)){
 
             campo=strtok(riga, ",");
-            array_film[counter].numero = atoi(campo);
+            array_film[counter].numero = atoi(campo); // casting da stringa a intero
 
             campo=strtok(NULL, ",");
             array_film[counter].titoloFilm = strdup(campo); //strdup ti ritorna la copia
