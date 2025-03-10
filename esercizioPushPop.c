@@ -1,67 +1,50 @@
-/*
-programma che chiede una stringa e verifichi che sia palindroma o no
-pila sarà con push e pop 
-*/
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct node {
+    char* value;
+    struct node* next;
+} Node;
 
-typedef struct node{
-    String value;
-    struct node* next;   
-}Node;
-
-
-int isEmpty(Node *head){
-    if(head == NULL){
-        return 1;
-    }else{
-        return 0;
-    }
+int isEmpty(Node* head) {
+    return head == NULL;
 }
 
-
-void push(Node **head, Node *element){
-    if(isEmpty(*head)){
-        *head = element;
-        element->next = NULL;
-    }else{
-        element->next = *head;
-        *head = element;
-    }
+void push(Node** head, char* str) {
+    Node* element = (Node*)malloc(sizeof(Node));
+    element->value = strdup(str);
+    element->next = *head;
+    *head = element;
 }
 
-
-Node* pop(Node **head){
-    Node *ret = *head;
-    if(isEmpty(*head)){
-        return NULL;
-    }else{
+Node* pop(Node** head) {
+    Node* ret = *head;
+    if (!isEmpty(*head)) {
         *head = ret->next;
     }
     return ret;
 }
 
+void freeNode(Node* node) {
+    free(node->value);
+    free(node);
+}
 
-
-int main(){
-    string n ;
+int main() {
+    char n[100];
     Node* head = NULL;
 
-        printf("inserisci una stringa per vedere se è palindroma ");
-        scanf("%s", &n);
-            Node* element = (Node*) malloc(sizeof(Node));
-            element->value = n;
-            push(&head, element);
-        
+    printf("Inserisci una stringa per vedere se è palindroma: ");
+    scanf("%s", n);
+    push(&head, n);
 
-    printPila(head);
-    Node *removed = pop(&head);
-    printPila(head);
+    Node* removed = pop(&head);
+    printf("Stringa rimossa dalla pila: %s\n", removed->value);
+    freeNode(removed);
 
     return 0;
 }
-
 
